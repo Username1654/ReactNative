@@ -1,0 +1,26 @@
+{
+   "house1": {
+    "address": "1234 Maple Stree",
+    "city": "Phoenix, AZ 85001",
+    "price": "$525,000",
+    "beds": 4,
+    "baths": 3,
+    "sqft": 2340,
+    "description":
+      "A beautifully updated 4-bedroom home nestled in a quiet neighborhood. Features an open floor plan, updated kitchen with quartz countertops, and a spacious backyard with a covered patio. Walking distance to top-rated schools.",
+    "agent": "Sarah Mitchell",
+    "agentEmail": "sarah.mitchell@realty.com"
+    },
+    "house2":{
+        "address": "9281 Avenue Street",
+    "city": "Phoenix, AZ 85001",
+    "price": "$300,555",
+    "beds": 3,
+    "baths": 1,
+    "sqft": 2340,
+    "description":
+      "one story 3 bedroom house in a unique image",
+    "agent": "Sarah Mitchell",
+    "agentEmail": "sarah.mitchell@realty.com"
+    }
+}
