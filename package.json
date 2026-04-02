@@ -13,7 +13,7 @@
     "@react-native-community/slider": "5.0.1",
     "@types/react": "~19.1.10",
     "@types/react-native": "^0.72.8",
-    "expo": "54",
+    "expo": "^54.0.33",
     "expo-asset": "~12.0.12",
     "expo-constants": "~18.0.13",
     "expo-linking": "~8.0.11",

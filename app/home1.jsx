@@ -8,50 +8,54 @@ import {
   ScrollView,
   Button,
   Pressable,
-  Linking
-} from 'react-native';
-import Slider from '@react-native-community/slider';
-import house from 'assets/house.png'
-// ─── House Data ───────────────────────────────────────────────────────────────
-import houseData from 'app/gomes.json';
-import house1 from "assets/house1.jpg";
-import house2 from "assets/house2.png";
-// ─── Image Sources ────────────────────────────────────────────────────────────
-// TODO: swap between these two and observe the difference
+  Linking,
 
+} from 'react-native';
+import { useState } from 'react';
+import Slider from '@react-native-community/slider';
+import house from 'assets/realEstateGuy.png'
+// ─── House images ───────────────────────────────────────────────────────────────
+import houseData from 'app/gomes.json';
+
+//---- homes ---------------------------------------------------------------------------
 
 export default function ListingScreen() {
+  const [hSearch, setHSearch] = useState('')
+ const filteredHouses = houseData.filter((home) =>
+  home.address.toLowerCase().includes(hSearch.toLowerCase()));
+
   return (
     < ScrollView style={styles.container} >
+    <View style={styles.header}>
+      
       < Image
         source={house}
         style={styles.heroImage}
         resizeMode="cover"
       />
+     
+      <TextInput type="search" style={styles.search} placeholder='Search for homes here!' id='hSearch' value={hSearch}
+        onChangeText={(text)=>{
+          setHSearch(text);
+        
+        }} />
+      </View>
       <Text style={styles.thing}>Homes In Your Area </Text>
 
-      <Pressable style={styles.houses} onPress={() => Linking.openURL('https://www.zillow.com/homedetails/42825-N-17th-Pl-New-River-AZ-85087/301612359_zpid/')}>
+      {filteredHouses.map((data)=>{
+        
+        return(
+        <Pressable style={styles.houses} onPress={() => Linking.openURL(data.link)}>
         < Image
-          source={house1}
+          source={data.image}
           style={styles.hImage}
         />
-        <Text style={styles.whiteText}>{houseData.house1.address}</Text>
-        <Text style={styles.whiteText}>{houseData.house1.price}</Text>
-        <Text style={styles.whiteText}>Beds: {houseData.house1.beds}</Text>
+        <Text style={styles.whiteText}>{data.address}</Text>
+        <Text style={styles.whiteText}>{data.price}</Text>
+        <Text style={styles.whiteText}>Beds: {data.beds}</Text>
       </Pressable>
-
-      <Pressable style={styles.houses} onPress={() => Linking.openURL('https://www.zillow.com/homedetails/38417-N-16th-St-Phoenix-AZ-85086/50183624_zpid/')}>
-        < Image
-          source={house2}
-          style={styles.hImage}
-        />
-        <Text style={styles.whiteText}>{houseData.house2.address}</Text>
-        <Text style={styles.whiteText}>{houseData.house2.price}</Text>
-        <Text style={styles.whiteText}>Beds: {houseData.house2.beds}</Text>
-      </Pressable>
-
-
-
+        )
+      })}
 
     </ScrollView>
   )
@@ -62,9 +66,23 @@ const styles = StyleSheet.create({
     backgroundColor: "#001B35",
     color: '#FFFFFF'
   },
+  header:{
+    flex:4
+  },
+  search:{
+    position:'absolute',
+    zIndex:1,
+    top:100,
+    left:50,
+    width:300,
+    color:'black',
+    textAlign:'center',
+    backgroundColor:'white'
+  },
   heroImage: {
     width: "100%",
     height: 250,
+    zIndex:0
   },
   thing: {
     fontSize: 20,
